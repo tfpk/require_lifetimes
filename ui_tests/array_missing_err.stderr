@@ -9,3 +9,15 @@ error: In this function, all references must be annotated with a lifetime.
   |
 4 | fn identity<'a>(a: &'a [&i32; 5]) -> &'a [&i32; 5] {
   |                                           ^
+
+error[E0106]: missing lifetime specifier
+ --> ui_tests/array_missing_err.rs:4:43
+  |
+4 | fn identity<'a>(a: &'a [&i32; 5]) -> &'a [&i32; 5] {
+  |                    -------------          ^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value, but the signature does not say which one of `a`'s 2 lifetimes it is borrowed from
+help: consider using the `'a` lifetime
+  |
+4 | fn identity<'a>(a: &'a [&i32; 5]) -> &'a [&'a i32; 5] {
+  |                                            ++

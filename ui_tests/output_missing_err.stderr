@@ -3,3 +3,20 @@ error: In this function, all references must be annotated with a lifetime.
   |
 4 | fn identity<'a, 'b>(a: &'a i32, _b: &'b i32) -> &i32 {
   |                                                 ^
+
+error[E0106]: missing lifetime specifier
+ --> ui_tests/output_missing_err.rs:4:49
+  |
+4 | fn identity<'a, 'b>(a: &'a i32, _b: &'b i32) -> &i32 {
+  |                        -------      -------     ^ expected named lifetime parameter
+  |
+  = help: this function's return type contains a borrowed value with an elided lifetime, but the lifetime cannot be derived from the arguments
+note: these named lifetimes are available to use
+ --> ui_tests/output_missing_err.rs:4:13
+  |
+4 | fn identity<'a, 'b>(a: &'a i32, _b: &'b i32) -> &i32 {
+  |             ^^  ^^
+help: consider using one of the available lifetimes here
+  |
+4 | fn identity<'a, 'b>(a: &'a i32, _b: &'b i32) -> &'lifetime i32 {
+  |                                                  +++++++++

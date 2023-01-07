@@ -4,6 +4,7 @@ use type_visitor::TypeVisitor;
 use syn::spanned::Spanned;
 use syn::Item;
 use syn::visit::Visit;
+use quote::ToTokens;
 
 
 /// This attribute allows you to require that a function have
@@ -45,11 +46,15 @@ pub fn require_lifetimes(
             visitor.visit_signature(&func.sig);
             let lifetime_errors = visitor.errors;
             if !lifetime_errors.is_empty() {
-                return proc_macro::TokenStream::from_iter(
+                let function = func.clone();
+                let mut function_stream: proc_macro::TokenStream = function.to_token_stream().into();
+                let error_stream = proc_macro::TokenStream::from_iter(
                     lifetime_errors
                         .iter()
                         .map(|e| Into::<proc_macro::TokenStream>::into(e.to_compile_error())),
                 );
+                function_stream.extend(error_stream);
+                return function_stream
             }
         }
         _ => {
