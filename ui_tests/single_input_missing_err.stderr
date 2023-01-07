@@ -1,0 +1,5 @@
+error: In this function, all references must be annotated with a lifetime.
+ --> ui_tests/single_input_missing_err.rs:4:33
+  |
+4 | fn identity<'a>(a: &'a i32, _b: &i32) -> &'a i32 {
+  |                                 ^

@@ -1,0 +1,5 @@
+error: In this function, the anonymous lifetime is not allowed.
+ --> ui_tests/single_anonymous_lifetime_err.rs:4:34
+  |
+4 | fn identity<'a>(a: &'a i32, _b: &'_ i32) -> &'a i32 {
+  |                                  ^^

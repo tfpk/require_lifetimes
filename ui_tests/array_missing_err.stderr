@@ -1,0 +1,11 @@
+error: In this function, all references must be annotated with a lifetime.
+ --> ui_tests/array_missing_err.rs:4:25
+  |
+4 | fn identity<'a>(a: &'a [&i32; 5]) -> &'a [&i32; 5] {
+  |                         ^
+
+error: In this function, all references must be annotated with a lifetime.
+ --> ui_tests/array_missing_err.rs:4:43
+  |
+4 | fn identity<'a>(a: &'a [&i32; 5]) -> &'a [&i32; 5] {
+  |                                           ^
