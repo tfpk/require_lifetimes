@@ -2,12 +2,16 @@
 name = "require_lifetimes"
 version = "0.1.0"
 edition = "2021"
+authors = ["Tom Kunc <tom@tfpk.dev>"]
+license = "MIT OR Apache-2.0"
+description = "A proc-macro to force rust authors to write lifetimes in function signatures."
+repository = "https://github.com/tfpk/require_lifetimes"
+readme = "README.md"
 
 [lib]
 path = "src/lib.rs"
 name = "require_lifetimes"
 proc_macro = true
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 syn = { version = "1.0.107", features=["full", "extra-traits", "visit"] }
