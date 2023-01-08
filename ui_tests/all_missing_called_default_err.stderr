@@ -1,0 +1,46 @@
+error: The swap function did not have appropriate lifetimes!
+ --> ui_tests/all_missing_called_default_err.rs:3:21
+  |
+3 | #[require_lifetimes{compile_error!("The swap function did not have appropriate lifetimes!");}]
+  |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: In this function, all references must be annotated with a lifetime.
+ --> ui_tests/all_missing_called_default_err.rs:4:12
+  |
+4 | fn swap(a: &i32, b: &i32) -> (&i32, &i32) {
+  |            ^
+
+error: In this function, all references must be annotated with a lifetime.
+ --> ui_tests/all_missing_called_default_err.rs:4:21
+  |
+4 | fn swap(a: &i32, b: &i32) -> (&i32, &i32) {
+  |                     ^
+
+error: In this function, all references must be annotated with a lifetime.
+ --> ui_tests/all_missing_called_default_err.rs:4:31
+  |
+4 | fn swap(a: &i32, b: &i32) -> (&i32, &i32) {
+  |                               ^
+
+error: In this function, all references must be annotated with a lifetime.
+ --> ui_tests/all_missing_called_default_err.rs:4:37
+  |
+4 | fn swap(a: &i32, b: &i32) -> (&i32, &i32) {
+  |                                     ^
+
+error[E0425]: cannot find function `swap` in this scope
+  --> ui_tests/all_missing_called_default_err.rs:11:16
+   |
+11 |     assert_eq!(swap(&x, &y), (&y, &x));
+   |                ^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+1  | use core::mem::swap;
+   |
+1  | use core::ptr::swap;
+   |
+1  | use std::mem::swap;
+   |
+1  | use std::ptr::swap;
+   |
