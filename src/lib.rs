@@ -1,10 +1,13 @@
 mod type_visitor;
+use syn::ItemFn;
 use type_visitor::TypeVisitor;
 
+use quote::quote;
 use quote::ToTokens;
 use syn::spanned::Spanned;
 use syn::visit::Visit;
 use syn::Item;
+use syn::parse_macro_input;
 
 /// This attribute allows you to require that a function have
 /// all lifetimes in its input and output be present.
@@ -71,7 +74,12 @@ pub fn require_lifetimes(
 
             let lifetime_errors = visitor.errors;
             if lifetime_errors.is_empty() {
-                return item;
+                let item = parse_macro_input!(item as ItemFn);
+
+                return quote! {
+                    #[allow(clippy::needless_lifetimes)]
+                    #item
+                }.into();
             }
             let function = func.clone();
 
